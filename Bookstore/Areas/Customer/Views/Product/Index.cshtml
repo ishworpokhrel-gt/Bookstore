@@ -1,0 +1,50 @@
+﻿@model List<Product>
+
+<h1>@TempData["success"]</h1>
+
+<table class="table table-bordered table-striped">
+<div class="row">
+    <div class="col-6">
+        Product List
+    </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">Create Product</a>
+        </div>
+</div>
+<thead>
+    <tr>
+        <th>Author</th>
+        <th>LeastPrice</th>
+        <th>Priceof50</th>
+        <th>Priceof100</th>
+        <th>Category</th>
+    </tr>
+</thead>
+<tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td>
+                    @obj.Author
+                </td>
+                <td>
+                    @obj.LeastPrice
+                </td>
+                <td>
+                    @obj.Priceof50
+                </td>
+                <td>
+                    @obj.priceof100
+                </td>
+                <td>
+                    @obj.Category.Name
+                </td>
+                <td>
+                    <a asp-controller="Product" asp-action="Upsert" class="btn btn-dark btn-group" asp-route-id="@obj.Id">Edit</a>
+                    <a asp-controller="Product" asp-action="Delete" class="btn btn-danger btn-group" asp-route-id="@obj.Id">Delete</a>
+                </td>
+            </tr>
+        }
+  </tbody>
+
+</table>

@@ -1,0 +1,38 @@
+﻿@model List<Category>
+
+<h1>@TempData["success"]</h1>
+
+<table class="table table-bordered table-striped">
+<div class="row">
+    <div class="col-6">
+        Category List
+    </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary">Create Category</a>
+        </div>
+</div>
+<thead>
+    <tr>
+        <th>Category Name</th>
+        <th>orderby</th>
+    </tr>
+</thead>
+<tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td>
+                    @obj.Name
+                </td>
+                <td>
+                    @obj.OrderBy
+                </td>
+                <td>
+                    <a asp-controller="Category" asp-action="Edit" class="btn btn-dark btn-group" asp-route-id="@obj.Id">Edit</a>
+                    <a asp-controller="Category" asp-action="Delete" class="btn btn-danger btn-group" asp-route-id="@obj.Id">Delete</a>
+                </td>
+            </tr>
+        }
+</tbody>
+
+</table>

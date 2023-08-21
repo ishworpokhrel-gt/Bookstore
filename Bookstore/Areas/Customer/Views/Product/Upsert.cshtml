@@ -1,0 +1,80 @@
+﻿@model ProductVM
+
+<div class="row">
+    <div class="col-12 text-center m-5" style="color:darkblue">
+        <h1>@(Model.product.Id != 0 ? "Update" : "Create") Product</h1>
+
+    </div>
+
+</div>
+<div asp-validation-summary="All"></div>
+
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="product.Id" hidden/>
+    <input asp-for="product.ImgUrl" hidden/>
+
+       <div class="row">
+           <div class="col-8">
+                <div class="mb-2">
+                    <label asp-for="product.Author"></label>
+                    <input asp-for="product.Author" class="form-control" />
+                    <span asp-validation-for="product.Author" class="text-danger"></span>
+                </div>
+                <div class="mb-2">
+                    <label asp-for="product.CategoryId"></label>
+                    <select class="form-select" asp-for="product.CategoryId" asp-items="@Model.CategoryList">
+                        <option disabled selected>--Select Category--</option>
+                    </select>
+                    <span asp-validation-for="product.CategoryId" class="text-danger"></span>
+
+                </div>
+
+                <div>
+                    <label asp-for="product.LeastPrice"></label>
+                    <input asp-for="product.LeastPrice" class="form-control" />
+                    <span asp-validation-for="product.LeastPrice" class="text-danger"></span>
+                </div>
+                <div>
+                    <label asp-for="product.Priceof50"></label>
+                    <input asp-for="product.Priceof50" class="form-control" />
+                    <span asp-validation-for="product.Priceof50" class="text-danger"></span>
+                </div>
+                <div>
+                    <label asp-for="product.priceof100"></label>
+                    <input asp-for="product.priceof100" class="form-control" />
+                    <span asp-validation-for="product.priceof100" class="text-danger"></span>
+                </div>
+                <div>
+                    <label asp-for="product.ImgUrl"></label>
+                    <input type="file" name="file" class="form-control" />
+                </div>
+                <div class="row m-4">
+                    <div class="col-6">
+                        @if (Model.product.Id == 0)
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Create</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Update</button>
+                        }
+
+                    </div>
+                    <div class="col-6">
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary form-control">Back</a>
+                    </div>
+
+                </div>
+            </div>
+      
+           <div class="col-4">
+               <img src="@Model.product.ImgUrl" width= "100%" />
+           </div>
+       </div>
+
+</form>
+@section scripts{
+    @{
+    <partial name="_ValidationScriptsPartial" />
+     }
+}
